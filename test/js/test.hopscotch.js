@@ -694,7 +694,6 @@ describe('Hopscotch', function() {
           prevBtn: 'p',
           skipBtn: 's',
           doneBtn: 'd',
-          stepNums: [ 'one', 'two', 'three' ]
         }
       });
       hopscotch.startTour({
@@ -717,11 +716,9 @@ describe('Hopscotch', function() {
       });
 
       expect($('.hopscotch-next').html()).toBe('n');
-      expect($('.hopscotch-bubble-number').html()).toBe('one');
       hopscotch.nextStep();
       expect($('.hopscotch-prev').html()).toBe('p');
       expect($('.hopscotch-next').html()).toBe('d');
-      expect($('.hopscotch-bubble-number').html()).toBe('two');
       hopscotch.endTour();
       hopscotch.resetDefaultI18N();
     });
@@ -1486,23 +1483,23 @@ describe('HopscotchBubble', function() {
 
       startTourWithMissingStepTarget();
 
-      expect(getStepNumber()).toBe("1");
+      expect(getStepNumber()).toBe("");
       expect(getStepContent()).toBe(stepContent.shoppingList);
 
       hopscotch.nextStep();
-      expect(getStepNumber()).toBe("2");
+      expect(getStepNumber()).toBe("");
       expect(getStepContent()).toBe(stepContent.eggs);
 
       hopscotch.nextStep();
-      expect(getStepNumber()).toBe("3");
+      expect(getStepNumber()).toBe("");
       expect(getStepContent()).toBe(stepContent.milk);
 
       hopscotch.prevStep();
-      expect(getStepNumber()).toBe("2");
+      expect(getStepNumber()).toBe("");
       expect(getStepContent()).toBe(stepContent.eggs);
 
       hopscotch.prevStep();
-      expect(getStepNumber()).toBe("1");
+      expect(getStepNumber()).toBe("");
       expect(getStepContent()).toBe(stepContent.shoppingList);
 
       hopscotch.endTour();
@@ -1510,13 +1507,13 @@ describe('HopscotchBubble', function() {
 
     it('should adjust step numbering when elements are dynamically created', function(){
       startTourWithMissingStepTarget();
-      expect(getStepNumber()).toBe("1");
+      expect(getStepNumber()).toBe("");
       expect(getStepContent()).toBe(stepContent.shoppingList);
 
       //will skip over 2nd tour step in config and move to 3rd step
       //since 2nd step was skipped, the bubble number for the 3rd step should be "2"
       hopscotch.nextStep();
-      expect(getStepNumber()).toBe("2");
+      expect(getStepNumber()).toBe("");
       expect(getStepContent()).toBe(stepContent.eggs);
 
       //create a missing target element for the 2nd tour step
@@ -1524,20 +1521,20 @@ describe('HopscotchBubble', function() {
 
       //now that target element for 2nd tour step exists, the bubble number should be "2"
       hopscotch.prevStep();
-      expect(getStepNumber()).toBe("2");
+      expect(getStepNumber()).toBe("");
       expect(getStepContent()).toBe(stepContent.dynamicTarget);
 
       hopscotch.prevStep();
-      expect(getStepNumber()).toBe("1");
+      expect(getStepNumber()).toBe("");
       expect(getStepContent()).toBe(stepContent.shoppingList);
 
       hopscotch.nextStep();
-      expect(getStepNumber()).toBe("2");
+      expect(getStepNumber()).toBe("");
       expect(getStepContent()).toBe(stepContent.dynamicTarget);
 
       //now that target element for 2nd tour step exists, the bubble number should be "3"
       hopscotch.nextStep();
-      expect(getStepNumber()).toBe("3");
+      expect(getStepNumber()).toBe("");
       expect(getStepContent()).toBe(stepContent.eggs);
 
       hopscotch.endTour();
@@ -1580,15 +1577,15 @@ describe('HopscotchBubble', function() {
         ]
       });
 
-      expect(getStepNumber()).toBe("1");
+      expect(getStepNumber()).toBe("");
       expect(getStepContent()).toBe(stepContent.shoppingList);
 
       hopscotch.nextStep();
-      expect(getStepNumber()).toBe("2");
+      expect(getStepNumber()).toBe("");
       expect(getStepContent()).toBe(stepContent.eggs);
 
       hopscotch.nextStep();
-      expect(getStepNumber()).toBe("3");
+      expect(getStepNumber()).toBe("");
       expect(getStepContent()).toBe(stepContent.milk);
 
       hopscotch.endTour();
@@ -1601,7 +1598,7 @@ describe('HopscotchBubble', function() {
 
       startTourWithMissingStepTarget();
 
-      expect(getStepNumber()).toBe("3");
+      expect(getStepNumber()).toBe("");
       expect(getStepContent()).toBe(stepContent.milk);
 
       hopscotch.endTour();
@@ -1609,7 +1606,7 @@ describe('HopscotchBubble', function() {
 
   });
 
-  describe('z-index', function(){
+  describe('z-index', function() {
     var bubble;
     it('should set z-index if provided', function(){
       hopscotch.startTour({
